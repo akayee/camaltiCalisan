@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         elevation: 5,
         borderRadius: 10,
-        backgroundColor: 'white',
-        height: 150,
+        height: 100,
         margin: 10
 
     },
@@ -49,17 +48,17 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: 120
+        height: 100
     },
     imageView: {
-        height: '70%'
+        height: '100%'
     },
     detail: {
+        position:'absolute',
+        bottom:5,
         width:'90%',
         alignItems: 'center',        
-        borderTopLeftRadius: 15,        
-        borderTopRightRadius: 15,
-        height: '20%',
+        borderRadius: 15,  
         backgroundColor:'white',
         margin:6
     },

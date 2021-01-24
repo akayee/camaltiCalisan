@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FlatList, StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, View, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CategoryItem from '../../components/shop/CategoryItem';
@@ -8,6 +8,7 @@ import Colors from '../../constants/Colors';
 
 
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -56,9 +57,10 @@ const Category = props => {
     };
     //Navigation title güncelleme işlemi. Propsdan alarak güncelliyor.
 
+    const orders = useSelector(state => state.orders.orders);
     const categories = useSelector(state => state.category.avaliableCategories);
     const dispatch = useDispatch();
-    return <View style={styles.main1}>
+    return <ScrollView style={styles.main1}>
 
         <View style={styles.container}>
             <Carousel
@@ -76,6 +78,20 @@ const Category = props => {
                 hasParallaxImages={true}
             />
         </View>
+        {orders &&
+            orders.map(order => <View style={styles.orders}>
+                <Text style={styles.orderTitle}>Siparişler</Text>
+                <Text style={styles.status}>{order.status}</Text>
+                <Text style={styles.total}>{order.totalAmount} ₺ </Text>
+                <TouchableOpacity>
+                    <Icon name={Platform.OS === 'android' ? 'navigate-outline' : 'location-outline'}
+                        size={23}
+                        color='white'
+                    />
+                </TouchableOpacity>
+            </View>)
+
+        }
 
 
         <View style={styles.cardCategory}>
@@ -101,7 +117,7 @@ const Category = props => {
             </View>
 
         </View>
-    </View>
+    </ScrollView>
 
 };
 
@@ -136,7 +152,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        paddingTop:5
+        paddingTop: 5
     },
     item: {
         width: screenWidth - 60,
@@ -176,8 +192,27 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
         width: '90%',
-        borderRadius:10,
-        alignItems:'center'
+        borderRadius: 10,
+        alignItems: 'center'
+    },
+    orders: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: Colors.primary,
+        borderRadius: 10,
+        padding: 10,
+        marginTop:10,
+        marginHorizontal: 10
+    },
+    orderTitle: {
+        fontWeight: "bold",
+        fontSize: 18,
+        color: 'white'
+    },
+    status:{
+        textTransform: 'uppercase'
     }
 })
 

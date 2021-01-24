@@ -23,7 +23,8 @@ const headerOptions= {
   headerTintColor: Platform.OS === 'android' ? Colors.primary : 'white',
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? 'white' : Colors.primary          
-  }
+  },
+  headerTitleAlign: 'center'
 };
 
 
