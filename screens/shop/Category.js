@@ -32,27 +32,33 @@ const Category = props => {
 
     const renderItem = ({ item, index }, parallaxProps) => {
         return (
-            <View style={styles.item}>
-                <ParallaxImage
-                    source={{ uri: item.imageUrl }}
-                    containerStyle={styles.imageContainer}
-                    style={styles.image}
-                    parallaxFactor={0.4}
-                    {...parallaxProps}
-                />
-                <View style={styles.offerItem}>
-                    <Text style={styles.title} numberOfLines={2}>
-                        {item.title}
-                    </Text>
-                    <Text style={styles.oldPrice}>
-                        {item.oldAmount.toFixed(2)} ₺
+            <View>
+                <TouchableOpacity onPress={() => { props.navigation.navigate('OffersDetail', { offerId: item.id }) }}>
+                    <View style={styles.item}>
+                        <ParallaxImage
+                            source={{ uri: item.imageUrl }}
+                            containerStyle={styles.imageContainer}
+                            style={styles.image}
+                            parallaxFactor={0.4}
+                            {...parallaxProps}
+                        />
+                        <View style={styles.offerItem}>
+                            <Text style={styles.title} numberOfLines={2}>
+                                {item.title}
+                            </Text>
+                            <Text style={styles.oldPrice}>
+                                {item.oldAmount.toFixed(2)} ₺
                 </Text>
-                    <Text style={styles.newPrice}>
-                        {item.newAmount.toFixed(2)} ₺
+                            <Text style={styles.newPrice}>
+                                {item.newAmount.toFixed(2)} ₺
                 </Text>
-                </View>
+                        </View>
 
+                    </View>
+                </TouchableOpacity>
             </View>
+
+
         );
     };
     //Navigation title güncelleme işlemi. Propsdan alarak güncelliyor.
@@ -203,7 +209,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         borderRadius: 10,
         padding: 10,
-        marginTop:10,
+        marginTop: 10,
         marginHorizontal: 10
     },
     orderTitle: {
@@ -211,7 +217,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white'
     },
-    status:{
+    status: {
         textTransform: 'uppercase'
     }
 })
